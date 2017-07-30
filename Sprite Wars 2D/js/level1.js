@@ -11,6 +11,8 @@ var jumpTimer = 0;
 
 var button;
 
+
+
 Game.Level1.prototype = {
 
     create:function() {
@@ -24,12 +26,15 @@ Game.Level1.prototype = {
 
         map = this.add.tilemap('map1');
         map.addTilesetImage('tile_desert','desertTile');
+        map.addTilesetImage('spikes','desertSpikes');
 
         layer = map.createLayer('Tile Layer 1');
         layer.resizeWorld();
 
 
         map.setCollisionBetween(0,2);
+
+        map.setTileIndexCallback(2,this.resetPlayer,this);
 
 
         player = this.add.sprite(100,0,'player');
@@ -66,7 +71,12 @@ Game.Level1.prototype = {
             spacebar: this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
         };
 
+        button = this.add.button(this.world.centerX-400, this.world.centerY - 200, 'buttons',
+            function() {
+            console.log('pressed');
+            },this,0,0,0);
 
+        button.fixedToCamera = true;
 
     },
 
@@ -116,4 +126,13 @@ Game.Level1.prototype = {
 
 
     },
+
+
+
+    resetPlayer:function() {
+        player.reset(100,0);
+    }
+
+
+
 }
