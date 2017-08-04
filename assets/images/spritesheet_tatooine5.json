@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "sand.png",
+	"frame": {"x":1,"y":1,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "spikes.png",
+	"frame": {"x":69,"y":1,"w":29,"h":25},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":7,"w":29,"h":25},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "zCoin.png",
+	"frame": {"x":35,"y":1,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "spritesheet_tatooine4.png",
+	"format": "RGBA8888",
+	"size": {"w":99,"h":34},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:587a0fa757b06e564f9325be2f2a08f4:4703e7912a5b393f78aa6d5e23103448:d617dbfe741bf2aa823afb589468f225$"
+}
+}

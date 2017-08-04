@@ -1,5 +1,22 @@
 
-Game.Level1 = function(game) {};
+
+// EnemyJawa = function(index,game,x,y) {
+//
+//     this.jawa = game.add.sprite(x,y,'jawa');
+//     this.jawa.anchor.setTo(0.5,0.5);
+//     this.jawa.name = index.toString();
+//
+//     game.physics.enable(this.jawa,Phaser.Physics.ARCADE);
+//     this.jawa.body.immovable = true;
+//     this.jawa.body.collideWorldBounds = true;
+//
+//     this.jawaTween = game.add.tween(this.jawa).to({
+//         y:this.jawa.y +25
+//     },2000,'Linear',true,0,100,true);
+// };
+
+
+Game.Level1 = function() {};
 
 var map;
 var layer;
@@ -9,35 +26,74 @@ var controls = {};
 var playerSpeed = 150;
 var jumpTimer = 0;
 
+var drag;
+
 var button;
+//var coin;
 
-
+//var coins;
+// var score = 0;
+// var scoreText;
 
 Game.Level1.prototype = {
 
-    create:function() {
+    create:function(game) {
+
 
         background = this.add.tileSprite(0, 0, 600, 400, 'desertBackground');
         background.fixedToCamera = true;
 
         this.physics.arcade.gravity.y = 1400;
 
+        scoreText = this.add.text(16, 15, 'score: 0', { font: '14px Arial', fill: 'yellow' });
+        scoreText.fixedToCamera = true;
 
 
         map = this.add.tilemap('map1');
-        map.addTilesetImage('tile_desert','desertTile');
-        map.addTilesetImage('spikes','desertSpikes');
+        map.addTilesetImage('spritesheet_tatooine6','tatooine');
+     //   map.addTilesetImage('tile_desert','desertTile');
+     //   map.addTilesetImage('spikes','desertSpikes');
+     //   map.addTilesetImage('spritesheet_coin','coin');
+
+
 
         layer = map.createLayer('Tile Layer 1');
+      //  coins = map.createLayer('Coins');
         layer.resizeWorld();
 
 
-        map.setCollisionBetween(0,2);
+        map.setCollisionBetween(0,4);
 
-        map.setTileIndexCallback(2,this.resetPlayer,this);
+        map.setTileIndexCallback(5,this.resetPlayer,this);
+        // map.setTileIndexCallback(6,this.getCoin,this);
 
 
-        player = this.add.sprite(100,0,'player');
+        // coins = this.add.group();
+        //
+        // coins.enableBody = true;
+        //
+        // //  Here we'll create 12 of them evenly spaced apart
+        // for (var i = 0; i < 7; i++)
+        // {
+        //     //  Create a star inside of the 'stars' group
+        //     var coin = coins.create(i * 150, 0, 'coin');
+        //
+        //     //  Let gravity do its thing
+        //    // coin.body.gravity.y = 120;
+        //
+        //     //  This just gives each star a slightly random bounce value
+        //     coin.body.bounce.y = 0.7 + Math.random() * 0.2;
+        //
+        //     coin.animations.add('coin',[0,1,2,3,4,5], 15, true);
+        //
+        //     coin.animations.play('coin');
+        // }
+
+
+
+
+
+        player = this.add.sprite(40,335,'player');
         player.anchor.setTo(0.5,0.5);
 
         // new game
@@ -71,18 +127,51 @@ Game.Level1.prototype = {
             spacebar: this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR)
         };
 
-        button = this.add.button(this.world.centerX-400, this.world.centerY - 200, 'buttons',
+        button = this.add.button(this.world.centerX-286, this.world.centerY - 200, 'buttons',
             function() {
             console.log('pressed');
-            },this,0,0,0);
+            },this,2,1,0);
 
         button.fixedToCamera = true;
+
+
+        drag = this.add.sprite(1500,336,'asteroid');
+        drag.anchor.setTo(0.5,0.5);
+        drag.inputEnabled = true;
+        drag.input.enableDrag(true);
+      //  this.physics.arcade.enable(drag);
+
+
+        // new EnemyJawa(0,game,player.x+300,player.y-200);
 
     },
 
     update:function() {
 
         this.physics.arcade.collide(player,layer);
+      //  this.physics.arcade.collide(drag,layer);
+
+        // this.physics.arcade.collide(coins, layer);
+        //
+        // this.physics.arcade.overlap(player, coins, collectCoin, null, this);
+        //
+        // function collectCoin (player, coin) {
+        //
+        //     // Removes the star from the screen
+        //     coin.kill();
+        //
+        //     //  Add and update the score
+        //     score += 10;
+        //     scoreText.text = 'Score: ' + score;
+        //
+        //     console.log(score,coin.length);
+        //
+        // }
+
+
+
+
+
 
         player.body.velocity.x = 0;
 
@@ -130,8 +219,18 @@ Game.Level1.prototype = {
 
 
     resetPlayer:function() {
-        player.reset(100,0);
-    }
+        player.reset(40,200);
+    },
+
+
+
+
+    // getCoin:function() {
+    //    map.putTile(2,layer.getTileX(player.x), layer.getTileY(player.y));
+    //
+    //
+    //    console.log(map);
+    // }
 
 
 

@@ -1,12 +1,12 @@
 var Game =  {};
 
-Game.Boot = function(game){
+Game.Boot = function(){
 
 };
 
 Game.Boot.prototype = {
 
-    init:function() {
+    init:function(game) {
 
         this.input.maxPointers = 1;
 
@@ -17,7 +17,7 @@ Game.Boot.prototype = {
         this.load.image('preloaderBar','assets/images/preloader.png');
     },
 
-    create:function() {
+    create:function(game) {
 
         this.state.start('Preloader');
     }
