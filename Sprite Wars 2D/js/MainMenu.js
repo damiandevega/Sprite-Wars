@@ -8,18 +8,19 @@ Game.MainMenu = function(game) {
 Game.MainMenu.prototype = {
   create:function(game) {
 
-      this.createButton(game,"Play",game.world.centerX,game.world.centerY + 32, 300, 100,
-          function() {
-            this.state.start('Level1');
-          });
-
-      this.createButton(game,"About",game.world.centerX,game.world.centerY + 192, 300, 100,
-          function() {
-              console.log('About');
-          });
-
-      titlescreen = game.add.sprite(game.world.centerX,game.world.centerY - 192,'titlescreen');
+      titlescreen = game.add.sprite(game.world.centerX,game.world.centerY,'titlescreen');
       titlescreen.anchor.setTo(0.5,0.5);
+
+      this.createButton(game,"Play",game.world.centerX,game.world.centerY + 125, 300, 100,
+          function() {
+              this.state.start('Level1');
+          });
+
+      // this.createButton(game,"About",game.world.centerX,game.world.centerY + 192, 300, 100,
+      //     function() {
+      //         console.log('About');
+      //     });
+
   },
 
   update:function(game) {
@@ -33,7 +34,7 @@ Game.MainMenu.prototype = {
       button1.width = w;
       button1.height = h;
 
-      var txt = game.add.text(button1.x,button1.y,string,{font:"14px Arial",fill:"#fff",align:"center"});
+      var txt = game.add.text(button1.x,button1.y,string,{font:"24px Arial",fill:"white",align:"center"});
       txt.anchor.setTo(0.5,0.5);
   }
 };
